@@ -130,7 +130,7 @@ const closeEditModal = () => {
 const updateEmployee = async () => {
   try {
     loading.value = true
-    await axios.put(`http://localhost:8081/api/employee/${editForm.value.id}`, editForm.value)
+    await axios.put(`http://localhost:8081/api/employee`, editForm.value)
     alert('✅ Employee updated successfully!')
     showEditModal.value = false
     await fetchEmployees()

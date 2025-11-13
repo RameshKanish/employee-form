@@ -103,6 +103,8 @@ const getAllDepartment = async () => {
 onMounted(() => {
   getAllDepartment();
 });
+
+
 </script>
 
 <style scoped>

@@ -1,25 +1,49 @@
 <template>
-  <div class="dashboard">
+  <div class="main-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="logo">🏦</div>
+      <nav>
+        <ul>
+          <li class="active">🏠</li>
+          <li>👥</li>
+          <li>📁</li>
+          <li>💰</li>
+          <li>📊</li>
+        </ul>
+      </nav>
+    </aside>
 
-    <div class="card">
-      <h3>Total Employees</h3>
-      <p>{{ totalEmployees }}</p>
-    </div>
+    <!-- Main Content -->
+    <div class="content">
+      <!-- Hero Section -->
+      <section class="hero">
+        <h2>Hi Ramesh Ramasamy Sankararaj</h2>
+        <p>Growth is a continuous journey.</p>
+      </section>
 
-    <div class="card">
-      <h3>Departments</h3>
-      <ul>
-        <li v-for="(count, dept) in departmentCount" :key="dept">
-          {{ dept }}: {{ count }}
-        </li>
-      </ul>
-    </div>
+      <!-- Cards Section -->
+      <section class="cards">
+        <div class="card">
+          <h3>Total Employees</h3>
+          <p class="number">{{ totalEmployees }}</p>
+        </div>
 
-    <div class="card">
-      <h3>Recent Join</h3>
-      <p>{{ recentJoinName }}</p>
+        <div class="card">
+          <h3>Departments</h3>
+          <ul>
+            <li v-for="(count, dept) in departmentCount" :key="dept">
+              {{ dept }}: <strong>{{ count }}</strong>
+            </li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Recent Join</h3>
+          <p>{{ recentJoinName }}</p>
+        </div>
+      </section>
     </div>
-    
   </div>
 </template>
 
@@ -29,7 +53,6 @@ import { ref, onMounted, computed } from 'vue'
 
 const employees = ref([])
 
-// Fetch all employees
 onMounted(async () => {
   try {
     const response = await axios.get('http://localhost:8081/api/employee/all')
@@ -39,7 +62,6 @@ onMounted(async () => {
   }
 })
 
-// Computed properties
 const totalEmployees = computed(() => employees.value.length)
 
 const departmentCount = computed(() => {
@@ -51,7 +73,6 @@ const departmentCount = computed(() => {
   return counts
 })
 
-// Show most recently joined employee
 const recentJoinName = computed(() => {
   if (employees.value.length === 0) return '—'
   const sorted = [...employees.value].sort(
@@ -62,27 +83,101 @@ const recentJoinName = computed(() => {
 </script>
 
 <style scoped>
-.dashboard {
+/* Layout */
+.main-container {
   display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin-bottom: 20px;
+  min-height: 100vh;
+  background-color: #f7faff;
+  font-family: 'Segoe UI', sans-serif;
 }
 
-.card {
-  background-color: white;
-  border-radius: 10px;
-  padding: 20px;
-  width: 250px;
-  text-align: center;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+/* Sidebar */
+.sidebar {
+  width: 70px;
+  background-color: #1f5a7f;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
 }
-
-.card ul {
-  list-style-type: none;
+.sidebar .logo {
+  font-size: 24px;
+  margin-bottom: 30px;
+}
+.sidebar ul {
+  list-style: none;
   padding: 0;
 }
+.sidebar li {
+  margin: 25px 0;
+  font-size: 22px;
+  cursor: pointer;
+  opacity: 0.8;
+}
+.sidebar li.active,
+.sidebar li:hover {
+  opacity: 1;
+}
 
+/* Main Content */
+.content {
+  flex: 1;
+  padding: 30px 40px;
+}
+
+/* Hero Section */
+.hero {
+  background: linear-gradient(to right, #a3d8ff, #e0f7fa);
+  border-radius: 15px;
+  padding: 25px 35px;
+  margin-bottom: 30px;
+  color: #004a6e;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+.hero h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+}
+.hero p {
+  margin-top: 5px;
+  font-size: 16px;
+  opacity: 0.9;
+}
+
+/* Cards Section */
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+}
+.card {
+  flex: 1;
+  background-color: white;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  min-width: 250px;
+  text-align: center;
+  transition: transform 0.2s;
+}
+.card:hover {
+  transform: translateY(-3px);
+}
+.card h3 {
+  color: #0078b7;
+  margin-bottom: 10px;
+}
+.card .number {
+  font-size: 28px;
+  font-weight: bold;
+  color: #004a6e;
+}
+.card ul {
+  padding: 0;
+  list-style: none;
+}
 .card li {
   font-size: 14px;
   margin-top: 5px;

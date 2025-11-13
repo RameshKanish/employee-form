@@ -1,18 +1,6 @@
 <template>
   <div class="main-container">
     <!-- Sidebar -->
-    <aside class="sidebar">
-      <div class="logo">🏦</div>
-      <nav>
-        <ul>
-          <li class="active">🏠</li>
-          <li>👥</li>
-          <li>📁</li>
-          <li>💰</li>
-          <li>📊</li>
-        </ul>
-      </nav>
-    </aside>
 
     <!-- Main Content -->
     <div class="content">
@@ -33,7 +21,7 @@
           <h3>Departments</h3>
           <ul>
             <li v-for="(count, dept) in departmentCount" :key="dept">
-              {{ dept }}: <strong>{{ count }}</strong>
+              <strong>{{ count }}</strong>
             </li>
           </ul>
         </div>
@@ -101,20 +89,24 @@ const recentJoinName = computed(() => {
   align-items: center;
   padding-top: 20px;
 }
+
 .sidebar .logo {
   font-size: 24px;
   margin-bottom: 30px;
 }
+
 .sidebar ul {
   list-style: none;
   padding: 0;
 }
+
 .sidebar li {
   margin: 25px 0;
   font-size: 22px;
   cursor: pointer;
   opacity: 0.8;
 }
+
 .sidebar li.active,
 .sidebar li:hover {
   opacity: 1;
@@ -133,13 +125,15 @@ const recentJoinName = computed(() => {
   padding: 25px 35px;
   margin-bottom: 30px;
   color: #004a6e;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
 }
+
 .hero h2 {
   margin: 0;
   font-size: 24px;
   font-weight: 600;
 }
+
 .hero p {
   margin-top: 5px;
   font-size: 16px;
@@ -152,32 +146,38 @@ const recentJoinName = computed(() => {
   flex-wrap: wrap;
   gap: 25px;
 }
+
 .card {
   flex: 1;
   background-color: white;
   border-radius: 15px;
   padding: 20px;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
   min-width: 250px;
   text-align: center;
   transition: transform 0.2s;
 }
+
 .card:hover {
   transform: translateY(-3px);
 }
+
 .card h3 {
   color: #0078b7;
   margin-bottom: 10px;
 }
+
 .card .number {
   font-size: 28px;
   font-weight: bold;
   color: #004a6e;
 }
+
 .card ul {
   padding: 0;
   list-style: none;
 }
+
 .card li {
   font-size: 14px;
   margin-top: 5px;
